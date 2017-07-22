@@ -6,7 +6,17 @@ Automatically restore database from dump or connection.
 
 Example, how to use, can be found at `tests` directory.
 
+## Install
+
+```
+ansible-galaxy install roquie.ansible-db-restore
+```
+
+[Example playbook to run](https://github.com/roquie/ansible-db-restore/blob/master/tests/playbooks/vagrant.yml).
+
 ## How to dump 
+
+#### PostgreSQL
 
 [Official documentaiton.](https://www.postgresql.org/docs/current/static/app-pgdump.html)
 
