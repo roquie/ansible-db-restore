@@ -2,8 +2,6 @@
 
 postgresql_user: postgres
 
-postgresql_python_library: python3-psycopg2
-
 # Host based authentication (hba) entries to be added to the pg_hba.conf. This
 # variable's defaults reflect the defaults that come with a fresh installation.
 postgresql_hba_entries:
