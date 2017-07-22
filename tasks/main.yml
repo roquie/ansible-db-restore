@@ -1,0 +1,8 @@
+---
+
+- name: PostgreSQL | Start database restoring...
+  when: pg_db_restore_from_files | length > 0
+  include: postgresql.yml
+
+
+

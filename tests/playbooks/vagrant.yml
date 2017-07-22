@@ -1,0 +1,19 @@
+---
+
+- hosts: vagrant
+  roles:
+    - tersmitten.locales
+  tags:
+    - locales
+
+- hosts: vagrant
+  roles:
+    - geerlingguy.postgresql
+  tags:
+    - postgresql
+
+- hosts: vagrant
+  roles:
+    - ansible-db-restore
+  tags:
+    - dumps_restore

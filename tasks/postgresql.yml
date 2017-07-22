@@ -1,0 +1,27 @@
+---
+
+- name: Creates temp directory
+  file:
+    path: "{{ pg_db_restore_tmp_folder }}"
+    state: directory
+
+- name: Move dumps to temporary folder on host
+  copy:
+    src: "{{ item.path }}"
+    dest: "{{ pg_db_restore_tmp_folder }}/{{ item.path|basename }}"
+  with_items: "{{ pg_db_restore_from_files }}"
+
+- block:
+  - name: Drop database
+    shell: "dropdb --if-exists -p {{ item.port|default(5432) }} -U postgres \"{{ item.dbname|default('database') }}\""
+    with_items: "{{ pg_db_restore_from_files }}"
+  - name: Create database
+    shell: "createdb -p {{ item.port|default(5432) }} -U postgres '{{ item.dbname|default('database') }}'"
+    with_items: "{{ pg_db_restore_from_files }}"
+  when: item.drop
+  become: yes
+  become_user: postgres
+
+- name: Restore database
+  shell: "PGPASSWORD={{ item.pass|default('') }} pg_restore {{ item.opts|default('-O') }} -h localhost -p {{ item.port|default(5432) }} -U '{{ item.user|default('postgres') }}' -d '{{ item.dbname|default('database') }}' < '{{ pg_db_restore_tmp_folder }}/{{ item.path|basename }}'"
+  with_items: "{{ pg_db_restore_from_files }}"

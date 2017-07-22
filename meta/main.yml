@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: roquie
+  description: Restore database-dumps from file or connection to server.
+  license: MIT
+  min_ansible_version: 2.2
+  platforms:
+    - name: Ubuntu
+      versions:
+        - xenial
+  galaxy_tags:
+    - database
+    - postgresql
+
+dependencies: []

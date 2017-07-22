@@ -1,0 +1,38 @@
+---
+
+postgresql_user: postgres
+
+postgresql_python_library: python3-psycopg2
+
+# Host based authentication (hba) entries to be added to the pg_hba.conf. This
+# variable's defaults reflect the defaults that come with a fresh installation.
+postgresql_hba_entries:
+  - { type: local, database: all, user: postgres, auth_method: peer }
+  - { type: local, database: all, user: all, auth_method: peer }
+  - { type: host, database: all, user: all, address: '0.0.0.0/0', auth_method: md5 }
+  - { type: host, database: all, user: all, address: '127.0.0.1/32', auth_method: md5 }
+  - { type: host, database: all, user: all, address: '::1/128', auth_method: md5 }
+
+postgresql_global_config_options:
+  - option: listen_addresses
+    value: "*"
+
+# Databases to ensure exist.
+postgresql_databases:
+  - name: ansible_db_restore
+
+# Users to ensure exist.
+postgresql_users:
+  - name: ansible_db_restore_user #required; the rest are optional
+    password: "root"
+    priv: "ALL"
+    db: "ansible_db_restore"
+
+# Restore database
+pg_db_restore_from_files:
+  - path: "{{ playbook_dir }}/../dumps/test-db.tar"
+    pass: "{{ postgresql_users[0].password }}"
+    drop: yes
+    user: "{{ postgresql_users[0].name }}"
+    dbname: "{{ postgresql_users[0].db }}"
+

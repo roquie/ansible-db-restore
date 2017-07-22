@@ -1,0 +1,30 @@
+---
+
+pg_db_restore_tmp_folder: "/tmp/ansible_pg_restore"
+
+# generated to pg_restore -O -U db_user -d money < ./tests/dumps/test-db.tar
+pg_db_restore_from_files:
+  - path: "{{ role_path }}/tests/dumps/test-db.tar"
+    port: 5432
+    pass: "root"
+    opts: "-O"
+    drop: yes
+    user: "db_user"
+    dbname: "database"
+
+# Coming soon.
+#
+# pg_dump -F t -O -x -d database -n public > /tmp/test-db.tar
+#pg_db_restore_from_conn:
+#  - host: "localhost"
+#    dbname: "database"
+#    user: "db_user"
+#    pass: "root"
+#    port: "5432"
+#    opts: "-F t -O -x"
+#    schema: "public"
+
+
+
+
+
