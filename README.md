@@ -27,6 +27,7 @@ For now supports:
 ## Vagrant
 
 * `cd /path/to/project`
+* `cd tests && ansible-galaxy install -r requirements.yml && cd ..`
 * `vagrant up` 
 
 ### Warning
