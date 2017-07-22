@@ -1,5 +1,7 @@
 # Ansible Database Restore
 
+[![Build Status](https://travis-ci.org/roquie/ansible-db-restore.svg?branch=master)](https://travis-ci.org/roquie/ansible-db-restore)
+
 Automatically restore database from dump or connection.
 
 Example, how to use, can be found at `tests` directory.
@@ -21,8 +23,11 @@ For now supports:
 
 ## Supported OS
 
-For now supports:
 * Ubuntu 16.04 LTS
+* Ubuntu 14.04 LTS
+* Centos 7
+* Debian 8
+* Debian 9
 
 ## Vagrant
 
